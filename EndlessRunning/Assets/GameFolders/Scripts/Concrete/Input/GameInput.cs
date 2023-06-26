@@ -37,6 +37,15 @@ namespace Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""feac9fc7-ae8e-4561-8e72-5a14023061ec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -72,6 +81,17 @@ namespace Input
                     ""action"": ""HorizontalMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""382bf2d5-b260-4272-b695-b666e73474d0"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Tap(duration=0.01)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -81,6 +101,7 @@ namespace Input
             // PlayerOnFod
             m_PlayerOnFod = asset.FindActionMap("PlayerOnFod", throwIfNotFound: true);
             m_PlayerOnFod_HorizontalMove = m_PlayerOnFod.FindAction("HorizontalMove", throwIfNotFound: true);
+            m_PlayerOnFod_Jump = m_PlayerOnFod.FindAction("Jump", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -141,11 +162,13 @@ namespace Input
         private readonly InputActionMap m_PlayerOnFod;
         private IPlayerOnFodActions m_PlayerOnFodActionsCallbackInterface;
         private readonly InputAction m_PlayerOnFod_HorizontalMove;
+        private readonly InputAction m_PlayerOnFod_Jump;
         public struct PlayerOnFodActions
         {
             private @GameInput m_Wrapper;
             public PlayerOnFodActions(@GameInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @HorizontalMove => m_Wrapper.m_PlayerOnFod_HorizontalMove;
+            public InputAction @Jump => m_Wrapper.m_PlayerOnFod_Jump;
             public InputActionMap Get() { return m_Wrapper.m_PlayerOnFod; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -158,6 +181,9 @@ namespace Input
                     @HorizontalMove.started -= m_Wrapper.m_PlayerOnFodActionsCallbackInterface.OnHorizontalMove;
                     @HorizontalMove.performed -= m_Wrapper.m_PlayerOnFodActionsCallbackInterface.OnHorizontalMove;
                     @HorizontalMove.canceled -= m_Wrapper.m_PlayerOnFodActionsCallbackInterface.OnHorizontalMove;
+                    @Jump.started -= m_Wrapper.m_PlayerOnFodActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_PlayerOnFodActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_PlayerOnFodActionsCallbackInterface.OnJump;
                 }
                 m_Wrapper.m_PlayerOnFodActionsCallbackInterface = instance;
                 if (instance != null)
@@ -165,6 +191,9 @@ namespace Input
                     @HorizontalMove.started += instance.OnHorizontalMove;
                     @HorizontalMove.performed += instance.OnHorizontalMove;
                     @HorizontalMove.canceled += instance.OnHorizontalMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
                 }
             }
         }
@@ -172,6 +201,7 @@ namespace Input
         public interface IPlayerOnFodActions
         {
             void OnHorizontalMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
         }
     }
 }
