@@ -1,4 +1,5 @@
 using Input;
+using Managers;
 using Mover;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Controller
         ReaderIInput _input;
         float _horizontal;
         bool _isJump;
-
+        bool _isDead = false;
         public float MoveSpeed => _moveSpeed;
         public float MoveRoundary => _moveRoundary;
 
@@ -30,6 +31,7 @@ namespace Controller
         }
         private void Update()
         {
+            if (_isDead) return;
             _horizontal = _input.Horizontal;
             if (_input.IsJump)
             {
@@ -46,7 +48,16 @@ namespace Controller
             }
             _isJump = false;
         }
+        private void OnTriggerEnter(Collider other)
+        {
+            EnemyController enemyController = other.GetComponent<EnemyController>();
 
+            if (enemyController != null)
+            {
+                _isDead = true;
+                GameManager.Instance.StopGame();
+            }
+        }
 
     }
 }
