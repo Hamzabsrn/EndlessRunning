@@ -105,6 +105,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1601837442241139568, guid: 852961f5aa6c0e04ca46090a3fc94814, type: 3}
+      propertyPath: _moveSpeed
+      value: 0.22
+      objectReference: {fileID: 0}
     - target: {fileID: 6362971568829577171, guid: 852961f5aa6c0e04ca46090a3fc94814, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -123,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6362971568829577171, guid: 852961f5aa6c0e04ca46090a3fc94814, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 55.4
+      value: 51.8
       objectReference: {fileID: 0}
     - target: {fileID: 6362971568829577171, guid: 852961f5aa6c0e04ca46090a3fc94814, type: 3}
       propertyPath: m_LocalRotation.w

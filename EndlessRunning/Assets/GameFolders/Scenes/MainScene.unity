@@ -507,10 +507,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor1
       objectReference: {fileID: 0}
-    - target: {fileID: 7986358192233013050, guid: 592341d9ad1d0344aa795149fc04cd9c, type: 3}
-      propertyPath: _moveSpeed
-      value: 0.22
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 592341d9ad1d0344aa795149fc04cd9c, type: 3}
 --- !u!1001 &2276495307214616034
